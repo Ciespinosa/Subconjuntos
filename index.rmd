@@ -7,6 +7,8 @@ author:
   email: ciespinosa@utpl.edu.ec
 date: "25 de noviembre 2020"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     fig_caption: yes
     highlight: haddock
@@ -15,8 +17,6 @@ output:
     toc: yes
     toc_float:
       smooth_scroll: no
-  pdf_document:
-    toc: yes
 ---
 
 
@@ -392,27 +392,27 @@ dinal <- read.csv("dinal.csv", header=T)
 }
 ```
 
-Esta es la tabla de datos __dinic__ y puede descargarla desde el siguiente enlace: https://github.com/Ciespinosa/Subconjuntos/dnic.csv. La podemos ver a continuación.
+Esta es la tabla de datos __dinic__ y puede descargarla desde el siguiente enlace: https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinic.csv. La podemos ver a continuación.
 
 ```{r, echo=FALSE, class.output="scroll-200"}
 print(dinic)
 ```
 
-Otra tabla de datos que usaremos durante este ejercicio es __nobj__ y puede descargarla desde el siguiente enlace:  . La podemos ver a continuación.
+Otra tabla de datos que usaremos durante este ejercicio es __nobj__ y puede descargarla desde el siguiente enlace:  https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/nobj.csv. La podemos ver a continuación.
 
 
 ```{r, echo=FALSE, class.output="scroll-200"}
 print(nobj)
 ```
 
-La tercera tabla de datos que usaremos es __dinic__ y puede descargarla desde el siguiente enlace:  . La podemos ver a continuación.
+La tercera tabla de datos que usaremos es __dinal__ y puede descargarla desde el siguiente enlace: https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinal.csv. La podemos ver a continuación.
 
 
 ```{r, echo=FALSE, class.output="scroll-200"}
-print(dinic)
+print(dinal)
 ```
 
-Finalmente, la última tabla que usaremos durante este ejercicio es __dnum__, esta tabla la puede descargar desde el siguiente enlace:  . La podemos ver a continuación.
+Finalmente, la última tabla que usaremos durante este ejercicio es __dnum__, esta tabla la puede descargar desde el siguiente enlace:  https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dnum.csv. La podemos ver a continuación.
 
 
 ```{r, echo=FALSE, class.output="scroll-200"}

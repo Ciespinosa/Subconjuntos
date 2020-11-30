@@ -1714,7 +1714,7 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 <span id="cb17-4"><a href="#cb17-4"></a>x[vl]<span class="co">#Extraemos los datos en función del vector lógico creado</span></span></code></pre></div>
 <pre><code>##  [1] 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>x[cat<span class="op">==</span><span class="st">&quot;a&quot;</span>] <span class="co">#Usamos directamente la operación lógica</span></span></code></pre></div>
-<pre><code>##  [1]  1  3  7 11 13 17 21 29 31 37</code></pre>
+<pre><code>## [1]  5 11 15 17 25 29 35 39</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Un vector de números naturales negativos. Por medio de esta indexación se seleccionan todos los elementos del vector excepto los indicados con valores negativos.</li>
 </ol>
@@ -1737,10 +1737,10 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 <span id="cb25-5"><a href="#cb25-5"></a><span class="kw">names</span>(z) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;letra&quot;</span>,<span class="st">&quot;mat&quot;</span>,<span class="st">&quot;dfr&quot;</span>) <span class="co">#le damos nombres</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a></span>
 <span id="cb25-7"><a href="#cb25-7"></a>yd[[<span class="st">&quot;peso&quot;</span>]]; yd[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>##  [1] 25.194882 10.774958 18.988903  8.153631 30.058171 11.651138 24.868384
-##  [8] 21.881937 17.918002 20.016970</code></pre>
-<pre><code>##  [1] 25.194882 10.774958 18.988903  8.153631 30.058171 11.651138 24.868384
-##  [8] 21.881937 17.918002 20.016970</code></pre>
+<pre><code>##  [1] 12.467940 24.178402 20.134524 28.231930  7.669265 21.948171 25.511130
+##  [8] 25.549039  8.938466 21.143197</code></pre>
+<pre><code>##  [1] 12.467940 24.178402 20.134524 28.231930  7.669265 21.948171 25.511130
+##  [8] 25.549039  8.938466 21.143197</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>z[[<span class="st">&quot;letra&quot;</span>]]; z[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
@@ -1766,8 +1766,8 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 <span id="cb35-2"><a href="#cb35-2"></a>zsdl &lt;-<span class="st"> </span>z<span class="op">$</span>letra</span>
 <span id="cb35-3"><a href="#cb35-3"></a></span>
 <span id="cb35-4"><a href="#cb35-4"></a>yddp</span></code></pre></div>
-<pre><code>##  [1] 25.194882 10.774958 18.988903  8.153631 30.058171 11.651138 24.868384
-##  [8] 21.881937 17.918002 20.016970</code></pre>
+<pre><code>##  [1] 12.467940 24.178402 20.134524 28.231930  7.669265 21.948171 25.511130
+##  [8] 25.549039  8.938466 21.143197</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>zsdl</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
 <p>Como vemos en este caso los objetos resultantes son vectores.</p>
@@ -1777,9 +1777,9 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 <h2><span class="header-section-number">2.3</span> Combinando la extracción</h2>
 <p>Como hemos visto hay muchas formas de extraer los datos, lo interesante de R es que puedo combinar las diferentes formas de extracción, por ejemplo puedo usar doble corchete y una expresión lógica, o un solo corchete y un la ubicación.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>yd[<span class="st">&quot;peso&quot;</span>][<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>,]</span></code></pre></div>
-<pre><code>## [1] 18.988903  8.153631</code></pre>
+<pre><code>## [1] 20.13452 28.23193</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>yd[[<span class="st">&quot;peso&quot;</span>]][<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] 18.988903  8.153631</code></pre>
+<pre><code>## [1] 20.13452 28.23193</code></pre>
 <p>Como vemos estas dos expresiones me dan la misma salida, pero miren bien la expresión, es ligeramente diferente. Recuerden los corchetes simples me devuelve un data frame (el cual tiene dos dimensiones), mientras que el corchete simple me devuelve un vector (con una sola dimensión).</p>
 </div>
 <div id="extracción-en-matrices" class="section level2">
@@ -1817,11 +1817,11 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">names</span>(yd)</span></code></pre></div>
 <pre><code>## [1] &quot;peso&quot;   &quot;tipo&quot;   &quot;altura&quot;</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>yd<span class="op">$</span>p</span></code></pre></div>
-<pre><code>##  [1] 25.194882 10.774958 18.988903  8.153631 30.058171 11.651138 24.868384
-##  [8] 21.881937 17.918002 20.016970</code></pre>
+<pre><code>##  [1] 12.467940 24.178402 20.134524 28.231930  7.669265 21.948171 25.511130
+##  [8] 25.549039  8.938466 21.143197</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>yd[[<span class="st">&quot;p&quot;</span>, exact=<span class="ot">FALSE</span>]]</span></code></pre></div>
-<pre><code>##  [1] 25.194882 10.774958 18.988903  8.153631 30.058171 11.651138 24.868384
-##  [8] 21.881937 17.918002 20.016970</code></pre>
+<pre><code>##  [1] 12.467940 24.178402 20.134524 28.231930  7.669265 21.948171 25.511130
+##  [8] 25.549039  8.938466 21.143197</code></pre>
 <p>Como vemos en estos dos casos hemos podido extraer la variable que lleva de nombre peso pero solamente usando la primera letra. Si hay una coincidencia parcial en más de una variable R dará la extracción como nula (NULL).</p>
 </div>
 </div>
@@ -2007,7 +2007,7 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
   background-color: inherit;
 }
 </style>
-<p>Esta es la tabla de datos <strong>dinic</strong> y puede descargarla desde el siguiente enlace: <a href="https://github.com/Ciespinosa/Subconjuntos/dnic.csv" class="uri">https://github.com/Ciespinosa/Subconjuntos/dnic.csv</a>. La podemos ver a continuación.</p>
+<p>Esta es la tabla de datos <strong>dinic</strong> y puede descargarla desde el siguiente enlace: <a href="https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinic.csv" class="uri">https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinic.csv</a>. La podemos ver a continuación.</p>
 <pre class="scroll-200"><code>##     mens    ord         ale
 ## 1      s 2160.0 0.005103427
 ## 2      e 1035.0 0.005478586
@@ -2109,116 +2109,30 @@ Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Partic
 ## 98     j 1147.5 0.995212824
 ## 99     o  720.0 0.996153687
 ## 100    u 1575.0 0.996608800</code></pre>
-<p>Otra tabla de datos que usaremos durante este ejercicio es <strong>nobj</strong> y puede descargarla desde el siguiente enlace: . La podemos ver a continuación.</p>
+<p>Otra tabla de datos que usaremos durante este ejercicio es <strong>nobj</strong> y puede descargarla desde el siguiente enlace: <a href="https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/nobj.csv" class="uri">https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/nobj.csv</a>. La podemos ver a continuación.</p>
 <pre class="scroll-200"><code>##   var1 var2 var3
 ## 1    d    a    r
 ## 2    d    f    u
 ## 3    g    h    e
 ## 4    e    h    m
 ## 5    d    n    r</code></pre>
-<p>La tercera tabla de datos que usaremos es <strong>dinic</strong> y puede descargarla desde el siguiente enlace: . La podemos ver a continuación.</p>
-<pre class="scroll-200"><code>##     mens    ord         ale
-## 1      s 2160.0 0.005103427
-## 2      e 1035.0 0.005478586
-## 3      u 1305.0 0.012597976
-## 4   &lt;NA&gt; 1350.0 0.021924786
-## 5      y 1755.0 0.028660718
-## 6      o  247.5 0.033454388
-## 7      q 1822.5 0.037613588
-## 8      g  157.5 0.043795999
-## 9      I  877.5 0.056256697
-## 10     u 1890.0 0.057278895
-## 11     i  652.5 0.068514682
-## 12     e 1462.5 0.093549199
-## 13     x   45.0 0.098118947
-## 14    as 2070.0 0.107866659
-## 15     a 1372.5 0.123456227
-## 16     l  225.0 0.136221049
-## 17     s 1395.0 0.140795863
-## 18     a  112.5 0.143437896
-## 19  &lt;NA&gt;  202.5 0.145626556
-## 20     w 1800.0 0.147786545
-## 21     s  405.0 0.159353059
-## 22     t 1192.5 0.165091829
-## 23     t 1732.5 0.168213538
-## 24     a  990.0 0.179728237
-## 25  &lt;NA&gt;  427.5 0.208408870
-## 26     a  337.5 0.223929239
-## 27     p 1935.0 0.229471715
-## 28     r 1710.0 0.234626575
-## 29     o  607.5 0.240483678
-## 30     i  697.5 0.261993447
-## 31     h 1867.5 0.272254071
-## 32     j 1980.0 0.274008672
-## 33     e  450.0 0.279828513
-## 34     o 1102.5 0.282326186
-## 35     d  315.0 0.283412239
-## 36     t   67.5 0.289598909
-## 37     u  810.0 0.308890601
-## 38     i 1912.5 0.334129212
-## 39     s 2205.0 0.345295328
-## 40     e   22.5 0.348262121
-## 41     d 1665.0 0.360474856
-## 42     a  180.0 0.363028631
-## 43  &lt;NA&gt;  765.0 0.365049253
-## 44     q  787.5 0.371354804
-## 45     e 2047.5 0.375126334
-## 46  &lt;NA&gt; 1012.5 0.382185312
-## 47     o 1215.0 0.388531546
-## 48     f 1642.5 0.394185030
-## 49     e  832.5 0.399153965
-## 50     s  270.0 0.402040657
-## 51     g 1440.0 0.421470749
-## 52     b 1125.0 0.426688861
-## 53     j 1597.5 0.429935643
-## 54     i  135.0 0.433497426
-## 55     i  945.0 0.442758509
-## 56     e 2025.0 0.450959441
-## 57     h 1507.5 0.458365410
-## 58     e 1687.5 0.477319994
-## 59     d 1260.0 0.485233605
-## 60     d 2092.5 0.489400111
-## 61  &lt;NA&gt; 1080.0 0.500219779
-## 62     m 1327.5 0.515526104
-## 63     n  900.0 0.521331373
-## 64     d 2250.0 0.523956376
-## 65     m 2002.5 0.565374739
-## 66     d 1417.5 0.590495460
-## 67     p  585.0 0.615207946
-## 68     n 1282.5 0.629581905
-## 69     n  472.5 0.633198157
-## 70     t 1485.0 0.636991933
-## 71     y 1530.0 0.641341531
-## 72     w 2227.5 0.642888533
-## 73     d 1552.5 0.659645633
-## 74     d  922.5 0.686376777
-## 75     o 1957.5 0.692608737
-## 76     r   90.0 0.696548551
-## 77     o  382.5 0.705568097
-## 78     h 2182.5 0.713349962
-## 79     l  517.5 0.724233336
-## 80     a 1777.5 0.728265759
-## 81     n  742.5 0.740051765
-## 82     t  360.0 0.762520164
-## 83  &lt;NA&gt;  292.5 0.765278796
-## 84     r 2115.0 0.768546500
-## 85     c  967.5 0.773720245
-## 86  &lt;NA&gt;  562.5 0.775930782
-## 87  &lt;NA&gt;  855.0 0.802127776
-## 88     c  675.0 0.838675139
-## 89  &lt;NA&gt;  495.0 0.858039980
-## 90     f 1845.0 0.873379155
-## 91     f 2137.5 0.902137606
-## 92     a  540.0 0.913305082
-## 93     s  630.0 0.926886661
-## 94  &lt;NA&gt; 1237.5 0.927665126
-## 95     e 1170.0 0.932163397
-## 96     b 1620.0 0.938074133
-## 97     l 1057.5 0.971142547
-## 98     j 1147.5 0.995212824
-## 99     o  720.0 0.996153687
-## 100    u 1575.0 0.996608800</code></pre>
-<p>Finalmente, la última tabla que usaremos durante este ejercicio es <strong>dnum</strong>, esta tabla la puede descargar desde el siguiente enlace: . La podemos ver a continuación.</p>
+<p>La tercera tabla de datos que usaremos es <strong>dinal</strong> y puede descargarla desde el siguiente enlace: <a href="https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinal.csv" class="uri">https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dinal.csv</a>. La podemos ver a continuación.</p>
+<pre class="scroll-200"><code>##           men cal grup              menfin ordfinal
+## 1        ella   8    c  use la función cat       30
+## 2       usted   7    c         para grabar       36
+## 3    nosotros  10    b use la función sink       45
+## 4       ellos   6    c         en el orden       25
+## 5          ha   6    c            califica       45
+## 6        ella   4    d             mensaje       64
+## 7          de   6    b       para generar        48
+## 8  realizado    4    d             reporte       35
+## 9         los   2    b          un reporte       52
+## 10  comenzado   3    f        función sink       56
+## 11         un   4    b         en el orden       54
+## 12 organizado   2    g             mensaje       71
+## 13        una   3    b             mensaje       65
+## 14    trabajo  10    b            califica       73</code></pre>
+<p>Finalmente, la última tabla que usaremos durante este ejercicio es <strong>dnum</strong>, esta tabla la puede descargar desde el siguiente enlace: <a href="https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dnum.csv" class="uri">https://raw.githubusercontent.com/Ciespinosa/Subconjuntos/master/dnum.csv</a>. La podemos ver a continuación.</p>
 <pre class="scroll-200"><code>##    loc grup ord
 ## 1    2    a   1
 ## 2    5    a   2
