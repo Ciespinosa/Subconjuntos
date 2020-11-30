@@ -1,0 +1,426 @@
+---
+title: "Subconjuntos o indexación"
+author:
+- name: "Carlos Iván Espinosa"
+  affiliation:
+    - Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Particular de Loja.
+  email: ciespinosa@utpl.edu.ec
+date: "25 de noviembre 2020"
+output:
+  html_document:
+    fig_caption: yes
+    highlight: haddock
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_float:
+      smooth_scroll: no
+  pdf_document:
+    toc: yes
+---
+
+
+Para regresar a Introducción R [![button](push1.png)](https://ciespinosa.github.io/IntroduccionR)
+
+--------
+
+Pueden descargar este documento en pdf haciendo clic [aquí](https://github.com/Ciespinosa/Subconjuntos/blob/master/index.pdf)
+
+--------
+
+# Subconjuntos de datos
+
+Una vez creada una estructura de datos la flexibilidad de `R` para manipular los objetos es enorme, podemos seleccionar cualquier elemento o grupo de elementos y operar sobre ellos. Existen múltiples posibilidades para poder obtener subconjuntos de los datos. Intentaré aclarar algunas de esas posibilidades.
+
+# La indexación  
+
+La manipulación de los objetos depende de la dimensionalidad de los objetos, usaremos los corchetes`[]` para acceder a las diferentes dimensiones, dentro de cada objeto podemos acceder a la dimensión filas, columnas y hojas.  Cada uno de estos elementos separados por una coma. Así, si tengo un vector (una dimensión), solo necesito especificar la dimensión filas, si tengo una matriz o una data.frame necesito especificar dos dimensiones, filas y columnas. Finalmente, si tengo un arreglo, necesito especificar tres dimensiones, filas, columnas y hojas.
+
+<br></br>
+
+> objeto[filas,columnas,hojas]
+
+Veamos un ejemplo;
+
+```{r}
+
+x <- 1:30 #Un vector
+x[8:12]
+
+y <- matrix(1:9,3,3) #Una matriz
+y[1:2,3]
+
+z <- array(1:27,c(3,3,3)) #Un arreglo
+z[2:3,2,3]
+```
+
+Como vemos para el vector especificamos solamente las filas que queremos obtener (elementos del 8 al 12). Para la matriz le dimos dos dimensiones los elementos de la fila uno y dos de la columna 3. Finalmente, en el arreglo le pedimos los elementos de la fila dos y tres, de la columna dos y de la hoja tres. 
+
+Si queremos todos los elementos de alguna de las dimensiones dejamos el espacio en blanco. Así, si me interesa tener todas las filas de la segunda columna de la matriz usaríamos:
+
+```{r}
+y[,2] #todas las filas de la columna dos
+y[2,] #todas las columnas de la fila dos
+```
+
+## Extracción de elementos
+
+La extracción de elementos del objeto puede realizarse de al menos 3 formas distintas.
+
+1. Un vector de números naturales, usamos un vector numérico que extrae los elementos que se encuentran en la posición determinada por el vector numérico, si el vector de extracción es 2:3 extrae los elementos de la posición dos y tres.
+
+```{r}
+
+x <- seq(1,40, by=2)
+x #todos los elementos del vector
+x[1:3] #los elementos de la posición uno a la tres
+x[c(1,3,4)] #los elementos en la posición uno, tres y cuatro
+```
+
+2. Un vector lógico de la misma longitud que el vector original. Podemos usar un vector lógico que permite extraer los elementos que cumplen la condición lógica. Podemos utilizar el mismo vector u otro vector.
+
+```{r}
+cat <- sample(c("a","b"), 20, replace =TRUE)
+vl <- x>10 #Generamos el vector lógico
+
+x[vl]#Extraemos los datos en función del vector lógico creado
+x[cat=="a"] #Usamos directamente la operación lógica
+
+```
+
+3. Un vector de números naturales negativos. Por medio de esta indexación se seleccionan todos los elementos del vector excepto los indicados con valores negativos.
+
+```{r}
+x[-(1:3)] #elementos que no están en posición uno a tres
+x[-c(1,3,4)] #elementos que no están en posición uno, tres y cuatro
+```
+
+La indexación de las matrices, marco de datos y los arreglos se pueden acceder bajo los mismos principios, únicamente debemos recordar que debemos manejar más de una dimensión.
+
+## Extracción de variables
+
+Los data.frames y las listas son estructuras especiales por lo cual tienen algunas formas de realizar subconjuntos de datos. Podemos acceder a las variables usando el __doble corchete__ ([[]]),  el __corchete simple__ ([]) o el __signo de dólar__ ($). Estos signos pueden usar con la __posición de la variable__ (la posición en números) o el __nombre de la variable__. Sin embargo el uso de cada una de estas posibilidades genera salidas que son ligeramente diferentes.
+
+### Uso de doble corchete
+
+Cuando usamos el doble corchete, R nos devuelve la estructura más baja posible, así, si tenemos un data frame la salida cuando uso el doble corchete es un vector. En cambio, sí uso el doble corchete en una lista, la salida me devolverá la estructura básica que se almacenó en esa posición.
+
+
+```{r}
+yd <- data.frame(peso=rnorm(10,20,5), tipo=rep(c("a","b"),5), 
+                 altura= rnorm(10, 165, 30))
+
+z <- list(letters[1:4], matrix(letters[1:9],3,3), yd) # Creamos la lista
+names(z) <- c("letra","mat","dfr") #le damos nombres
+
+yd[["peso"]]; yd[[1]]
+
+z[["letra"]]; z[[1]]
+```
+En este caso el uso de los dos corchetes nos devolvió la estructura más baja, un vector. En el caso de las listas esta estructura más baja depende de lo que tenga en esa posición. Mire que sucede si cambia _letra_ por _mat_. El uso del doble corchete lo podemos usar tanto con los nombres como con la posición de la variable. 
+
+### Uso del corchete simple
+
+El corchete simple podemos usarlo en los dos estructuras de objetos, data frames y listas. En este caso la salida de esta extracción nos devuelve un objeto con igual característica al objeto "madre", así, si extraigo los datos de un data frame la salida será un data frame, si extraigo de una lista la salida será una lista.
+
+```{r}
+
+ydpes <- yd["peso"]
+
+zlet <- z["letra"]
+
+class(ydpes)
+class(zlet)
+
+```
+Como vemos los elementos extraídos siguen siendo un data frame y una lista. Puede desplegarlos a los nuevos objetos creados.
+
+
+### Uso del signo de dólar ($)
+
+El uso del signo de dólar se usa únicamente con el nombre. La salida de este tipo de selección es similar a lo que obtenemos con el uso del doble corchete.
+
+```{r}
+yddp <- yd$peso
+zsdl <- z$letra
+
+yddp
+zsdl
+
+```
+
+Como vemos en este caso los objetos resultantes son vectores.
+
+## Combinando la extracción
+
+Como hemos visto hay muchas formas de extraer los datos, lo interesante de R es que puedo combinar las diferentes formas de extracción, por ejemplo puedo usar doble corchete y una expresión lógica, o un solo corchete y un la ubicación.
+
+```{r}
+yd["peso"][3:4,]
+yd[["peso"]][3:4]
+```
+
+Como vemos estas dos expresiones me dan la misma salida, pero miren bien la expresión, es ligeramente diferente. Recuerden los corchetes simples me devuelve un data frame (el cual tiene dos dimensiones), mientras que el corchete simple me devuelve un vector (con una sola dimensión).
+
+## Extracción en matrices
+
+En el caso de las matrices la forma de extracción es distinta, aunque igual que en los otros casos se puede extraer con nombre o por posición, en este caso es necesario decir si el nombre es de las filas o de las columnas.
+
+```{r}
+colnames(y) <- letters[1:3]
+
+y["a"]
+
+y[,"a"]; y[,1]
+
+```
+
+Como vemos el uso del nombre con uno o dos corchetes no produce una extracción de las variables. Es necesario que aclare que me refiero a los nombres o la posición de las columnas, en este caso la salida es siempre un vector.
+
+Otra forma de extraer los datos de las matrices es con la ubicación global, la posición global del elemento en la matriz se refiere al puesto contado en orden a partir del primer elemento, contando por filas. Veamos un ejemplo.
+
+```{r}
+matC <- matrix(letters[1:9], 3,3)
+matC
+
+# el elemento "a" se encuentra en la posición 1, 
+# así que puedo extraer este elemento usando esta posición
+
+matC[1]
+
+# el elemento "e" se encuentra en la posición 5
+
+matC[5]
+```
+
+Nótese que para extraer los elementos de la matriz por la posición global usamos un solo corchete y una sola dimensión. 
+
+## Extracción con coincidencia parcial
+
+Como hemos visto el usar los nombres de las variables para poder extraer los datos nos permite tener mucha flexibilidad, sin embargo, algunas veces es posible que los nombres de las variables sean muy largos y complejos. Una de las ventajas que ofrece R es que la extracción de la variable se la puede hacer con una coincidencia parcial. Veamos un ejemplo.
+
+```{r}
+names(yd)
+
+yd$p
+yd[["p", exact=FALSE]]
+
+```
+
+Como vemos en estos dos casos hemos podido extraer la variable que lleva de nombre peso pero solamente usando la primera letra. Si hay una coincidencia parcial en más de una variable R dará la extracción como nula (NULL).
+
+
+# Eliminando datos con NA
+
+Cuando trabajamos con datos, muchas veces estos datos no se encuentran completos y tenemos variables con datos no disponibles (__NA__; Not Available), estos datos pueden ser un problema cuando estamos haciendo un análisis por lo que algunas veces nos interesa quedarnos con el grupo de datos que tenemos los datos completos.
+
+## Eliminando los casos con NAs de un data frame
+
+La función `complete.cases` nos permite generar un vector lógico con las filas que tienen los datos completos (sin NA).
+
+```{r}
+set.seed(34)
+dtfna <- data.frame(a=sample(c(rnorm(10,23,5), rep(NA,5)), 10),
+           b=sample(c(rnorm(10,46,5), rep(NA,3)), 10),
+           c=sample(c(rnorm(10,2,5), rep(NA,3)), 10))
+
+compdt <- complete.cases(dtfna)
+compdt
+```
+
+Ahora tenemos un vector que nos dice los casos en los que tenemos los datos completos. Podemos usar este vector para extraer los datos completos.
+
+```{r}
+
+dtfna[compdt,]
+
+```
+
+Podemos tener el mismo resultado de filtrado usando la función `na.omit`, esta función nos devuelve una matriz con los datos completos. La diferencia de esta función con la función `complete.cases` usada anteriormente, es que la primera es una función lógica, nos devuelve un vector lógico de los casos completos y no, la función `na.omit`es una función que elimina los NAs de una matriz.
+
+```{r}
+na.omit(dtfna)
+```
+
+
+## Eliminando NAs de un vector
+
+Cuando lo que nos interesa es extraer los datos completos de un vector usamos la función `is.na` esta función nos permite ubicar los datos con NA y con esto extraer los datos completos.
+
+```{r}
+vecna <- sample(c(rnorm(10,46,5), rep(NA,3)), 10)
+naV <- is.na(vecna)
+
+vecna; naV
+```
+
+El vector lógico nos muestra donde están los NAs bueno realmente nos interesa que datos nos son NA, así que usaremos el opuesto con la ayuda de "!".
+
+```{r}
+naV <- !is.na(vecna) #Busca los que no son NA
+vecna[naV]
+```
+
+Ahora tenemos los datos sin NA.
+
+# La función subset
+
+La indexación es la forma más formal de seleccionar filas y columnas de un marco de datos o una matriz, sin embargo, muchas veces la indexación puede tornarse engorrosa. El seleccionar unas filas de unas columnas definidas puede implicar generar diferentes índices para cada dimensión.
+
+La función `subset` proporciona una forma más efectiva y sencilla de seleccionar filas y columnas. Esta función permite, seleccionar unas columnas y generar filtros lógicos para las filas. 
+
+```{r}
+#Incluimos una columna en el data frame de nivel
+set.seed(345)
+dtfna$nivel <- sample(c("ab", "bc", "cf"), 10, replace=T)
+
+#Seleccionamos las columnas a y c
+#filtramos los casos que corresponden a "ab"
+
+subset(dtfna, select= c(a, c), subset= nivel=="ab" )
+
+```
+
+Como podemos observar el código para seleccionar columnas y hacer filtros es muy sencillo. Una cosa importante es que en esta función los nombres de las columnas, que normalmente esperaríamos que estén con comillas, son escritas directamente sin comillas.
+
+Puesto que nuestra matriz de salida tiene NAs, deberíamos hacer un filtro para eliminar los NAs.
+
+```{r}
+subset(dtfna, select= c(a, c), subset= nivel=="ab" &
+         complete.cases(dtfna))
+```
+La función `subset` nos ofrece realizar filtros con facilidad y es muy flexible. Una funcionalidad interesante de esta función es nos permite eliminar columnas usando el nombre, algo que no es posible con otras funciones.
+
+```{r}
+subset(dtfna, select= -c(b, nivel), subset= nivel=="ab" &
+         complete.cases(dtfna))
+
+```
+Finalmente, podemos usar los nombres de las variables almacenadas en un vector para realizar la selección.
+
+```{r}
+sna <- c("a", "b")
+subset(dtfna, select= sna, subset= nivel=="ab" &
+         complete.cases(dtfna))
+
+```
+
+# Ordenando vectores
+
+Muchas veces cuando estamos trabajando con nuestros datos es necesario tener la posibilidad de ordenar nuestros datos. R tiene un par de funciones que nos dan la posibilidad de ordenar un vector; `order` y `sort`
+
+```{r}
+
+z <- sample(letters, 20)
+z
+sort(z, decreasing = FALSE)
+order(z, decreasing=FALSE)
+```
+
+La diferencia entre estas dos funciones es que `sort` ordenar los elementos en orden ascendente. Mientras que order genera un vector con la posición de cada elemento, si cambiamos el argumento de decreasing a TRUE entonces el orden será decreciente.
+
+Ahora, podemos usar esa función para ordenar un data frame. Veamos cómo podemos usar estas funciones para ordenar nuestro data frame.
+
+```{r}
+dtfna[order(dtfna["nivel"]),]
+
+```
+
+Nuestra matriz ahora esta ordenada por el nivel. Ahora, nos podría interesar ordenar nuestra matriz usando más de una variable.
+
+```{r}
+dtfna[order(dtfna["nivel"], dtfna["a"]),]
+```
+
+Otra forma es usar la función `with`, esta función nos permite seleccionar un objeto y con ese generar una operación.
+
+
+```{r}
+dtfna[with(dtfna, order(nivel, a)),]
+```
+
+______________
+
+#  Ejercicios {.tabset}  
+
+## __Indicaciones__
+
+1. Lea los cuatro conjuntos de datos desde internet según las direcciones mostradas en la sección _Datos_. Es importante que cargue los datos y les asigne los nombres correctamente como se explica en esa sección
+
+2. El primer objeto que usaremos es el objeto _dinic_, con este objeto siga los siguientes pasos:
+
+    a. Extraer como un data.frame las columnas "mens" y "ord".
+    b. Use el vector "ord" para extraer todos los elementos que son mayores que 1300.
+    c. Extraiga la columna "mens" como un vector y ordenar este vector usando el vector "ord" de forma decreciente.
+
+3. Use la función `cat` e imprima el vector extraido en el punto anterior y el vector que obtenga de extraer la posición global de la matriz "nobj" en las posiciones: 1, 10, 12, 14.
+
+4. Use el mensaje para definir el objeto a usar. Con el objeto definido en el mensaje siga los siguientes pasos:
+
+    a. Extraiga un data.frame con todas las variables, donde "grup" es igual a "a".
+    b. Ordene los datos de forma ascendente usando la variable "ord". 
+    c. Extraiga como un vector los datos de la variable "loc".
+    d. Utilice el vector extraido en el punto _b_ para extraer como vector la columna _1_ del ojeto que no ha sido usado hasta este punto. El vector extraido en el punto _b_ le dará la posición de los elementos a extraer.
+    e. Asignele a este vector el nombre "mensaje"
+    f. Con el mismo objeto, extraiga todos los datos donde ord es mayor a 4
+    g. Ordene de forma descendente la matriz usando las variables; "ord" y "grup"
+    h. Del data.frame obtenido en el punto _g_ extraiga los dos primeros datos de la variable "loc". Use este objeto para extraer los datos del último data.frame (el que fue usado antes) de la variable 2. El objeto resultante de esta extracción debería ser un data.frame. Guarde el objeto como "califica".
+
+    i. Extraiga la variable grup, donde loc tiene el máximo valor (use la función `max`).
+    f. Use el objeto generado para filtrar del último data.frame, donde la variable 3 es igual al objeto creado en el punto _i_.
+    g. Ordene de forma ascendente el data.frame resultante en el punto _f_  usando la variable 4
+    h. Extraiga la columna de menfin como vector.
+    i. Siga las indicaciones que se dan en ese vector.
+
+
+## __Datos__
+
+
+```{r, echo = FALSE}
+
+dinic <- read.csv("dinic.csv", header=T)
+nobj  <- read.csv("nobj.csv", header=T)
+dnum  <- read.csv("dnum.csv", header=T)
+dinal <- read.csv("dinal.csv", header=T)
+```
+
+```{css, echo=FALSE}
+.scroll-200 {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
+Esta es la tabla de datos __dinic__ y puede descargarla desde el siguiente enlace: https://github.com/Ciespinosa/Subconjuntos/dnic.csv. La podemos ver a continuación.
+
+```{r, echo=FALSE, class.output="scroll-200"}
+print(dinic)
+```
+
+Otra tabla de datos que usaremos durante este ejercicio es __nobj__ y puede descargarla desde el siguiente enlace:  . La podemos ver a continuación.
+
+
+```{r, echo=FALSE, class.output="scroll-200"}
+print(nobj)
+```
+
+La tercera tabla de datos que usaremos es __dinic__ y puede descargarla desde el siguiente enlace:  . La podemos ver a continuación.
+
+
+```{r, echo=FALSE, class.output="scroll-200"}
+print(dinic)
+```
+
+Finalmente, la última tabla que usaremos durante este ejercicio es __dnum__, esta tabla la puede descargar desde el siguiente enlace:  . La podemos ver a continuación.
+
+
+```{r, echo=FALSE, class.output="scroll-200"}
+print(dnum)
+```
+
+## __Informe__
+
+El informe debe contener los códigos usados para el desarrollo de la práctica y el reporte generado.
+
+
