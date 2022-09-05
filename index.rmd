@@ -7,8 +7,6 @@ author:
   email: ciespinosa@utpl.edu.ec
 date: "septiembre 2022"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     fig_caption: yes
     highlight: haddock
@@ -17,6 +15,8 @@ output:
     toc: yes
     toc_float:
       smooth_scroll: no
+  pdf_document:
+    toc: yes
 ---
 
 
