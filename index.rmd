@@ -5,7 +5,7 @@ author:
   affiliation:
     - Laboratorio de ecología y servicios ecosistémicos, Universidad Técnica Particular de Loja.
   email: ciespinosa@utpl.edu.ec
-date: "25 de noviembre 2020"
+date: "septiembre 2022"
 output:
   pdf_document:
     toc: yes
@@ -347,30 +347,34 @@ ______________
 
 1. Lea los cuatro conjuntos de datos desde internet según las direcciones mostradas en la sección _Datos_. Es importante que cargue los datos y les asigne los nombres correctamente como se explica en esa sección
 
-2. El primer objeto que usaremos es el objeto _dinic_, con este objeto siga los siguientes pasos:
+2. El primer objeto que usaremos es el objeto _dinic_ (objeto 1), con este objeto siga los siguientes pasos:
 
-    a. Extraer como un data.frame las columnas "mens" y "ord".
-    b. Use el vector "ord" para extraer todos los elementos que son mayores que 1300.
-    c. Extraiga la columna "mens" como un vector y ordenar este vector usando el vector "ord" de forma decreciente.
+    a. Extraer como un data.frame las columnas 1 y 2 del objeto 1.
+    b. Use el la columna 2 para extraer todos los elementos que son menores a 1300.
+    c. Extraiga la columna 1 como un vector y ordenar este vector usando el vector "ord" de forma ascendente (decreasing = False).
 
-3. Use la función `cat` e imprima el vector extraido en el punto anterior y el vector que obtenga de extraer la posición global de la matriz "nobj" en las posiciones: 1, 10, 12, 14.
+3. Use la función `cat` e imprima el vector extraido en el punto anterior y el vector que obtenga de extraer la posición global de la matriz "nobj" en las posiciones: 1, 10, 12, 14. Verifique que el objeto _nobj_ es una matriz.
 
-4. Use el mensaje para definir el objeto a usar. Con el objeto definido en el mensaje siga los siguientes pasos:
+4. Use el mensaje que obtiene del paso anterior para definir el objeto que usará para seguir con la tarea. Con este objeto (objeto 2) siga los siguientes pasos:
 
-    a. Extraiga un data.frame con todas las variables, donde "grup" es igual a "a".
-    b. Ordene los datos de forma ascendente usando la variable "ord". 
-    c. Extraiga como un vector los datos de la variable "loc".
-    d. Utilice el vector extraido en el punto _b_ para extraer como vector la columna _1_ del ojeto que no ha sido usado hasta este punto. El vector extraido en el punto _b_ le dará la posición de los elementos a extraer.
-    e. Asignele a este vector el nombre "mensaje"
-    f. Con el mismo objeto, extraiga todos los datos donde ord es mayor a 4
-    g. Ordene de forma descendente la matriz usando las variables; "ord" y "grup"
-    h. Del data.frame obtenido en el punto _g_ extraiga los dos primeros datos de la variable "loc". Use este objeto para extraer los datos del último data.frame (el que fue usado antes) de la variable 2. El objeto resultante de esta extracción debería ser un data.frame. Guarde el objeto como "califica".
+    a. Extraiga un data.frame con todas las variables, donde la columna 2 es igual a "a".
+    b. Ordene los datos del data frame generado en _4.a_ de forma ascendente usando la columna 3. 
+    c. Extraiga como un vector los datos de la columna 1.
+    
+5. Utilice el vector extraido en el punto _4.c_ para extraer como vector la columna _1_ del ojeto que no ha sido usado hasta este punto (objeto 3). El vector extraido en el punto _4.c_ le dará la posición de los elementos a extraer en el objeto 3. Asigne el vector extraido con el nombre "mensaje".
 
-    i. Extraiga la variable grup, donde loc tiene el máximo valor (use la función `max`).
-    f. Use el objeto generado para filtrar del último data.frame, donde la variable 3 es igual al objeto creado en el punto _i_.
-    g. Ordene de forma ascendente el data.frame resultante en el punto _f_  usando la variable 4
-    h. Extraiga la columna de menfin como vector.
-    i. Siga las indicaciones que se dan en ese vector.
+6. Extraiga todos los datos donde ord es mayor a 4 del objeto 2.
+    
+    a. Ordene de forma descendente la matriz resultante del paso _6_, usando las columnas; 3 y 2. Mantenga el orden definido para orgenar primero 3 y luego 2.
+    b. Del data.frame obtenido en el punto _6.a_ extraiga los dos primeros datos de la columna 1. 
+    d. Use el objeto obtenido en _6.b_ para extraer la columna 2 del objeto 3. Guarde el objeto resultante como "califica".
+
+7. Extraiga la columna 3 del objeto 3, donde el objeto creado en _6.d_ tiene el máximo valor (use la función `max`).
+    
+    a. Filtre el objeto 3 donde la columna 3 es igual al objeto creado en el punto _7_.
+    b. Ordene de forma ascendente el data.frame resultante en el punto _7.1_  usando la columna 5
+    c. Extraiga la columna 4 como vector.
+    d. Siga las indicaciones que se dan en ese vector.
 
 
 ## __Datos__
